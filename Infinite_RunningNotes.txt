@@ -867,6 +867,439 @@ Using JDBC code ,we shld insert file to table.
 Using JDBC code ,we shld display file from table.
 
 Clues: FileObjectStream
+==========================
+Day9
+=======
+>Servletconfig--is for servlet
+>servletcontext---context is for entire application.
+>Filter,filterchain?Filters advantages
+>Lifecycle of servlets---loading--init--service---destroy
+>Horizontal scalling of servers and vertical scaling of server?
+>Web.xml--deployment descriptor/config file
+>types if configuration files
+xml,json,bson,properties,YAML
+>>Http request and httpresponse
+
+Program1:
+Display Welcome to Infinite using Servlet.
+>>javax.servlet.http.HttpServlet
+
+
+OCWCD---Oracle certified Web component Developer
+Servlets comes undeer J2EE.
+
+
+>>In eclipse,we we create Servlet,it will create 2 methods.
+doget,dopost.
+
+HTTP Method.
+GET---doGet
+PUT---doPut
+POST
+DELETE
+TRACE
+PATCH
+
+But in servlets ,we have below methods:
+doGet, if the servlet supports HTTP GET requests
+doPost, for HTTP POST requests
+doPut, for HTTP PUT requests
+doDelete, for HTTP DELETE requests
+
+>put vs post?
+put----updating data
+post----creating new data
+get---pulling the data
+delete---deleting the data
+patch---updating partial data
+
+
+HTTTP ERROR MEssaages
+>>https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
+
+>>Till Tomcat 5.0 version ,when ever we make changes in code,we need to restart server.
+After 5.0 version,they addded auto restart feature.
+
+>>>>http://localhost:8080/ServletsTraining/infinite.html
+http://localhost:8080/ServletsTraining/infinite.html?username=srinivas&password=jlfkalkaslflas
+
+
+>>Any data which you push thru get method is a query Parameters.
+>>>Any data which you push thru post method is a Pay load.
+>In java,to display date,we are going to use Date class which is part of java.util.
+
+if username is bob123,password as apabng123$,then display my website 
+with "Successfully Loggedin" in green color.
+otherwise red color.
+
+
+>sendRedirect() is for browser. side redirecting.
+RequestDispatcher() comes under server side redireting.
+>>config and context,filters
+
+
+servletcontext is for entire app.
+servletconfig is for individual servlet.
+request and response methods
+ <context-param>
+    <param-name>mysql</param-name>
+    <param-value>com.mysql.jdbc.Driver</param-value>
+  </context-param>
+  
+     <init-param>
+    <param-name>Mysql</param-name>
+    <param-value>com.mysql.java.Driver</param-value>
+    </init-param>
+    <init-param>
+     <param-name>Oracle</param-name>
+    <param-value>com.oracle.java.Driver</param-value>
+    </init-param>
+
+>Task2:
+
+Write a Servlet program to display records from Employee table using Servletconfing ig object.
+==============================
+DAy 10:
+---------
+Java bean
+DAO Design pattern
+Troubleshooting techniqs for Apache TOmcat server
+Understanlog from console.
+Date:
+TImestamp: combination of date and time.
+>>Task1:
+>Display current date using java program
+>Explore date class in sql and util package.
+>Display current day,day in week and current month using date class.
+>Display Italy  cusrrent date and time.
+>Write a program to find diffrence between 2 dates in days and minutes.
+
+TAsk2:
+=========
+>i/p:123456 o/p : one lakh Twenty Three Thousand Four Hundred and fifty Six only
+>>i/p:123456 o/p : 1,23,456
+>>optional:Display random number using Java.
+Rule: Shld not use Random class.
+
+--SecureRandomClass---Salt,seed
+
+useragent
+
+session management
+=======================
+>In web sessions plays important role for conversation between 2 parties ie client and server.
+>any data which we store in sesion are temporary.
+>In java,we can perform session management using below ways.
+1)Cookies
+2)Hiddenform fields
+3)URL rewriting
+4)HttpSession
+
+>In jsp,we shld focus on types of tags.
+expression language---EL---{}
+scriptlets...etc
+
+>include is mainly usesd in "Tiles" concept in web.
+==========================================
+Day 11
+=======
+>Connection conn =null;
+try{
+Connection con=Drivermnager.get
+
+}
+finally{
+
+conn.close();
+}
+
+>>>>Task: Yashraj+Neha+Bhanuprakash seetha=======>Friday is demo
+Requirement:
+Sending email using JAVA
+
+LOg4J Tool:
+===========
+>https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core/2.18.0
+//log4j.appender.FILE.File=${log}/log.out
+log4j.rootLogger=DEBUG,FILE,console
+// Set the appender named X to be a File appender
+log4j.appender.FILE=org.apache.log4j.FileAppender
+log4j.appender.FILE.File=D:\\logs\\jbackend.log
+//log4j.appender.FILE.File=${log}/log.out
+log4j.appender.file.MaxFileSize=1MB
+log4j.appender.file.MaxBackupIndex=1
+// Define the layout for X appender
+log4j.appender.FILE.layout=org.apache.log4j.PatternLayout
+log4j.appender.FILE.layout.conversionPattern=%m%n
+
+log4j.appender.console=org.apache.log4j.ConsoleAppender
+log4j.appender.console.layout=org.apache.log4j.PatternLayout
+log4j.appender.console.layout.ConversionPattern=[%t] %-5p %c %x - %m%n
+
+>	PropertyConfigurator.configure("log4j.properties");
+	 private static final Logger logger
+     = Logger.getLogger(Log4jTesting.class);
+=================================
+DAy12:
+======
+Apache Tomcat===8.5
+
+AJP is protocol which is used by tomcat to do communication between Catalina and jasper.
+
+Core java--->Connector shld be in build path of ur project.
+Web app----->external jars shld be in Server Lib directory
+
+com.mysql.jdbc.Driver
+
+>>NIO stands for NON blocking io
+classnot found exception
+
+>Tomcat uses Juli as a logging mechanism tool.
+
+>>All web app which we create will be started in webapp folder.
+>>All 3rd part libraries shld be plavced in lib folder
+>>log files for server will be placed in lib folder
+>>Tomcat can be started and stop from bin folder.
+>>tomcat configrations are available in conf folder.
+
+
+
+>> Always encrypt username and passwword in jdbc.ie sensitive data shld be encrypted.
+Note: always encryption shld be done in one os and decryption shld be done in same os or same JVM.
+
+Project name: JavaSecurity
+Packagename: com.infinite.security
+private static SecretKeySpec secretKey;
+  private static byte[] key;
+
+  public static void setKey(final String myKey) {
+    MessageDigest sha = null;
+    try {
+      key = myKey.getBytes("UTF-8");
+      sha = MessageDigest.getInstance("SHA-1");
+      key = sha.digest(key);
+      key = Arrays.copyOf(key, 16);
+      secretKey = new SecretKeySpec(key, "AES");
+    } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+      e.printStackTrace();
+    }
+  }
+
+  public static String encrypt(final String strToEncrypt, final String secret) {
+    try {
+      setKey(secret);
+      Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
+      cipher.init(Cipher.ENCRYPT_MODE, secretKey);
+      return Base64.getEncoder()
+        .encodeToString(cipher.doFinal(strToEncrypt.getBytes("UTF-8")));
+    } catch (Exception e) {
+      System.out.println("Error while encrypting: " + e.toString());
+    }
+    return null;
+  }
+
+  public static String decrypt(final String strToDecrypt, final String secret) {
+    try {
+      setKey(secret);
+      Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5PADDING");
+      cipher.init(Cipher.DECRYPT_MODE, secretKey);
+      return new String(cipher.doFinal(Base64.getDecoder()
+        .decode(strToDecrypt)));
+    } catch (Exception e) {
+      System.out.println("Error while decrypting: " + e.toString());
+    }
+    return null;
+  }
+  
+  abcd-----srin
+  
+  bcded----srini
+  
+  >>>SecureRandom class---1st--- salt and seed
+    apache Random utils---2nd 
+
+>>Encrypt/Decrypt ur credentials and integrate with JDBC code+Log4j?
+
+
+System.out.println(JavaSecurity.encrypt("root", "qwe123"));
+		System.out.println(JavaSecurity.decrypt("Z6Qk9CCVAljmxy/fYwruXw==", "qwe123"));
+		System.out.println(JavaSecurity.encrypt("mysql", "q123"));
+		System.out.println(JavaSecurity.decrypt("8H+B/GtPRXuSjTfGjMzv4Q==", "q123"));
+
+Filereader is a java io package.
+>>>>mysql connector----desktop----buildpath
+>>>>mysql connector----Servlet----Server>>lib
+
+>>Write a servlet program to read data from properties file using Servlets.
+Hint: 	InputStream st=getServletContext().getResourceAsStream("");
+
+>>>>MYSQL
+SQL BAsics
+ER models
+========================
+Day 13
+-----
+Topics:
+
+Java POJO----Coding/MCQ----Score will be '0' if standards are not followed
+Mysql----MCQS+5-10 Queries---output is not matching ,score will be 0
+Log4j Inetgartion--Coding/MCQ
+
+>>Evry row  in table will have rownum and rowid.Both are called as "Psuedo coulumns".DB server will create psuedo columns automatically when we create atable.
+>DBA responsibilities:
+=======================
+1)Schema creation/DB designing and required integrity constraints creation
+2)Administration tasks
+3)Backup of data on daily basis.
+4)Restore the data on failure
+5)He shld how to use db tools effectively
+6)Security
+7)user creations and privileges to the team shld be provided by dba.
+8)Involve the desgining of db for projects
+9)maintainance of db
+10)performance tunning.
+11)If any isssues,he shld focus on root causes.
+12)Report/Data Analytics Generation about db utilization.
+13)Debugging
+ 
+Senior DBA---Associate DBA
+
+>>In db,we call row as tuple.
+
+Note: Dont alter the table/database after inserting the data or if data exists in table.
+
+Never use  * while displaying table data.
+
+SYntax for creating a table:
+
+create table <tablename> (column name datatype,column name datatype,....);
+>Validations of data while inserting can be done using integrity constraints.
+
+>>ROW_NUMBER() OVER (<partition_definition> <order_definition>)
+
+>Mysql provides Aggregate functions.
+
+>Remaning tablename:
+alter table <oldtablename> rename <newtable_name>;
+
+>Removing records from a table:
+truncate table <tablename>;
+>drop will remove the entire table.
+drop table <tablename>;
+
+Task1: can i rollback a dropped table from database?
+Task2: Delete vs truncate?
+>In databases,we will have 2 types of bins.
+recycle bin and purge bin.
+
+>Select user from mysql.user;  
+SELECT user, host, db, command FROM information_schema.processlist;  
+>>>>>>>
+https://dev.mysql.com/doc/refman/8.0/en/string-functions.html
+
+Note:All predefined Mysql functions can be used only in SELECT Statement.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
