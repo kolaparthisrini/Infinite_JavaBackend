@@ -1199,808 +1199,396 @@ https://dev.mysql.com/doc/refman/8.0/en/string-functions.html
 
 Note:All predefined Mysql functions can be used only in SELECT Statement.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Date and time functions
+string functions
+Aggregate functions
+>>CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    CONSTRAINT PK_Person PRIMARY KEY (ID)
+);
+
+>>or ALTER TABLE table_name
+ADD PRIMARY KEY(column_list);
+
+>>MySQL has five reference options: CASCADE, SET NULL, NO ACTION, RESTRICT, and SET DEFAULT.
+
+CASCADE: if a row from the parent table is deleted or updated, the values of the matching rows in the child table automatically deleted or updated.
+SET NULL:  if a row from the parent table is deleted or updated, the values of the foreign key column (or columns) in the child table are set to NULL.
+RESTRICT:  if a row from the parent table has a matching row in the child table, MySQL rejects deleting or updating rows in the parent table.
+NO ACTION: is the same as RESTRICT.
+SET DEFAULT: is recognized by the MySQL parser. However, this action is rejected by both InnoDB and NDB tables.
+>>CREATE TABLE categories(
+    categoryId INT AUTO_INCREMENT PRIMARY KEY,
+    categoryName VARCHAR(100) NOT NULL
+) ENGINE=INNODB;
+
+CREATE TABLE products(
+    productId INT AUTO_INCREMENT PRIMARY KEY,
+    productName varchar(100) not null,
+    categoryId INT,
+    CONSTRAINT fk_category
+    FOREIGN KEY (categoryId) 
+        REFERENCES categories(categoryId)
+);
+>>
+
+insert into products (productName,categoryId) values('MAC',2);
+
+Cascading rules comes to picture.
+
+Cascade Example: CREATE TABLE products(
+    productId INT AUTO_INCREMENT PRIMARY KEY,
+    productName varchar(100) not null,
+    categoryId INT NOT NULL,
+    CONSTRAINT fk_category
+    FOREIGN KEY (categoryId) 
+    REFERENCES categories(categoryId)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+) ENGINE=INNODB;
+
+>>>CREATE INDEX Syntax
+Creates an index on a table. Duplicate values are allowed:
+
+CREATE INDEX index_name
+ON table_name (column1, column2, ...);
+CREATE UNIQUE INDEX Syntax
+Creates a unique index on a table. Duplicate values are not allowed:
+
+CREATE UNIQUE INDEX index_name
+ON table_name (column1, column2, ...);
+
+>>>Dropping index: ALTER TABLE table_name
+DROP INDEX index_name;
+
+
+Day 14:
+==========
+
+>>con.setAutoCommit() method in jdbc.if autocommit is false,until we issue autocomiit true,till that time data will not be persisted in db.Thats the reason this method is used for Transactions.
+
+>Synatax: set autocommit=true/false;
+To commit data:  commit;
+To rollback: rollback;
+
+Note: rollback is for records in atable but not db objects.
+
+Db objects: Table,view,sequence,trigger,index,stored proccedures...etc
+
+>for closing the mysql console termina,use exit command.
+
+>>Inserting Data into Table using select approach:
+mysql> create table laptop(laptopname char(30),origin char(30),price integer,pin
+code integer,laptopmodel varchar(55));
+
+
+>for laptopname field,default value shld be "leneovo",Origin shld be "India",pincode,default shld be 10000. 
+
+>>Task2: coalesc,case in mysql
+
+
+To establish a relation between tables,we need to have a common column and there shld exist primary key and foreign key relation.
+
+>>Normalization?
+1)1nf
+2)2nf
+3)3nf
+4)boyceecodd normal form
+ Memory will not be allocated for views.
+
+====================================================================
+Maven
+-----
+>Versions: v1,v2,v3
+https://repo.maven.apache.org/maven2/archetype-catalog.xml
+>>In eclipse maven is inbuilt.
+>>By default wen we create aproject,maven will create a local repository.
+Its name is ".m2"
+>>.m2 will be created by maven automatically.
+>>MAven has 2 types of configuration files.
+1)pom.xml----is local to project
+2)settings.xml----is global to all projects running in workspace
+>>Repos of 3 types.
+1)Local
+2)Corporate--------------more secure.We will use "SONATYPE NEXUS" tool or JFROG tool to createe corprate repository.Only IT team or DEVOPS team will create.
+3)Public-----not secure
+
+Example:You are working on a SCM project.You need to use JFREEcharts feature in ur code.
+
+Mytrika,yasaswini,Bhanu prasad---Jfreechart library
+
+Need to add hibernate,Spring AOP,Hikari dependencys in pom.xml.any version
+>>in Spring,name of the configuration file is "applicationcontext.xml"
+
+https://docs.spring.io/spring-framework/docs/4.2.x/spring-framework-reference/html/xsd-configuration.html
+
+<?xml version="1.0" encoding="UTF-8"?> is called as prolog.
+
+>In majority of xml files we will have dtd.DTD stands for document type definition.
+xsi?
+xmlns?
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+<context:annotation-config/>
+
+<bean id="custAddress1" class="org.cap.demo.Address">
+<property name="doorNo" value="190/AA"/>
+<property name="streetName" value="West Avvenue"/>
+<property name="city" value="Chennai"/>
+</bean>
+</beans>ad 
+
+Instead of applicationcontext.xml ,we are using sample.xml.
+In spring bean means pojo class.
+Every pojo class will have properties,and we need to create setters and getters.
+>Via config file,we are going to push the data.
+Steps:
+======
+1)Create a Maven project without archetype.
+2)Create a package and create a bean class with required properties.
+3)Create xml file in "src/resources" folder.
+4)Create a  java main class to test the Dependency injection.
+5)Clean build the project
+6)Run the java main class.
+ 
+ 
+ Create a new maven project for injecting below values.
+ todays date,name,city.
+>> <constructor-arg index="0" value="India"></constructor-arg>
+ 
+Annotation:
+The annotation-config is configured in Spring XML configuration. The annotation-config activates various annotations to be detected in bean classes. It is configured in XML configuration as following.
+<context:annotation-config/> 
+The annotation-config activates following annotations in bean classes.
+1. Spring @Required and @Autowired annotations.
+2. JSR 250 @PostConstruct, @PreDestroy and @Resource annotations.
+3. JAX-WS @WebServiceRef annotation.
+4. EJB 3 @EJB annotation.
+5. JPA @PersistenceContext and @PersistenceUnit annotations.
+ 
+Scope:
+singleton – Scopes a single bean definition to a single object instance per Spring IoC container.
+prototype – Return a new bean instance each time when requested
+request – Return a single bean instance per HTTP request.
+session – Return a single bean instance per HTTP session.
+globalSession – Return a single bean instance per global HTTP session.
+
+>><bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="2010-01-31" />
+			</bean>
+
+
+>>Autowiring:
+No.	Mode	Description
+1)	no	It is the default autowiring mode. It means no autowiring bydefault.
+2)	byName	The byName mode injects the object dependency according to name of the bean. In such case, property name and bean name must be same. It internally calls setter method.
+3)	byType	The byType mode injects the object dependency according to type. So property name and bean name can be different. It internally calls setter method.
+4)	constructor	The constructor mode injects the dependency by calling the constructor of the class. It calls the constructor having large number of parameters.
+5)	autodetect	It is deprecated since Spring 3.
  
 
+>>>>>Design patterns
 
+Factory design pattern
 
+>a constructor argument can be a number which is index and it starts with 0.
 
+goals:
+clean
+install 
+deploy
+=====>
+>Write a servlet program to upload only pdf files to server.(without web.xml)---wednesday----collections
+>Hikari connection pool mechanism using Spring core(Dependency injection).---Thursday--maven,helper classes
+>Write a java program to read an csv file.---Hint:file io package---Wednesday
+>E-R diagram--->self learning---friday
 
+==================>
+https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/support/ClassPathXmlApplicationContext.html#%3Cinit%3E(java.lang.String)
 
 
+BeanFactory---->ApplicationContext---->
+{}---EL
 
+===>JDK1.8
+annotation---1.5
 
+javac DD.java;code --annotations
 
+When i run my code,mycode shld throw error messages saying" Annotations not supprted".
 
+Tip: backward compatability
 
+clue: Mission 369 movie
 
+>Windows>>C:\\users\\
 
+>>>Create a Maven Project without archetype.
+Projectname: SpringCollections
 
+"applicationContext.xml"
 
+SPRING CORE+SPRING MVC
+>>MAP
+key and value
 
+ABCD(Map p,Set s,List l)
+{
+}
 
+app.xml:
 
+<constructor-arg>
+			<map>
+				<entry key="10000" value="Vinay"></entry>
+				<entry key="10001" value="Neha"></entry>
+				<entry key="10002" value="Subhash"></entry>
+			</map>
+		</constructor-arg>
+		<constructor-arg="st">
+			<set>
+				<value>Pradeep</value>
+				<value>Prasad</value>
+				<value>Prasad</value>
+			</set>
+		</property>
 
 
 
+>>>>>Singleton
+Over view of Spring MVC and MVC flow
 
+Factory design pattern,factory method?
 
+A obj= new A();
+thru Factory methods
 
+MVC Flow:
+===========
+1)Client requests for a page by specifying the Web URL for the page. E.g. https://skolaparthi.com
+2)Client request is intercepted by the Dispatcher Servlet also known as Front Controller. Dispatcher Servlet is a servlet specified in Web.XML file (for XML Based configurations) or in the Web Configuration class (for java based configurations).
+3)Dispatcher Servlet uses URL Mapping Handler to find out the relevant controller class to which request should be passed for subsequent processing. For example, If you have a Controller defined for all requests by specifying “/” in the URL, all requests will be entertained by that controller.
+4)Once Dispatcher Servlet has identified the Controller to be considered, it passes the client request to the controller.
+5)The controller class is the main class controlling the business logic flow once request has been dispatched it it by dispatcher servlet. This class will implement the methods for different type of http requests (e.g. GET, POST) and all logic to call Service layer methods will reside in this controller class.
+6)The controller class will also be responsible for returning the ModelAndView object back to the dispatcher servlet after getting all business logic executed and any data returned from DAO layer. ModelAndView object returned by the controller back to the controller specified both view and model objects.
 
+Controller class is annotated by @Controller annotation.
 
+7)After receiving ModelAndView object from the controller, Dispatcher Servlet now sends model object to view resolver to get the name of the view which needs to be rendered.
+8)Once the view to be rendered has been identified, Dispatcher Servlet passes model object to the view. Model object contains the data which needs to be displayed in the view. View will be rendered with the model data. Views can be designed in any front-end technology.
+9)This view is returned to the client and client can see the view and associated data on his browser.
 
+3-Oct-2023
+==========
+>@Repository Annotation is used to indicate that the class provides the mechanism for storage, retrieval, update, delete and search operation on objects.
+>
 
+1: add hikari dependencies to pom.xml
+2)create a Hikariconfig object and provide necessary metadata.
+3)pass config as parameter to datasource.
 
+====>
+DEFAULT: Use the default isolation level of the underlying database.
 
+READ_COMMITTED: A constant indicating that dirty reads are prevented; non-repeatable reads and phantom reads can occur.
 
+READ_UNCOMMITTED: This isolation level states that a transaction may read data that is still uncommitted by other transactions.
 
+REPEATABLE_READ: A constant indicating that dirty reads and non-repeatable reads are prevented; phantom reads can occur.
 
+SERIALIZABLE: A constant indicating that dirty reads, non-repeatable reads, and phantom reads are prevented.
 
+What do these Jargons dirty reads, phantom reads, or repeatable reads mean?
 
+Dirty Reads: Transaction "A" writes a record. Meanwhile, Transaction "B" reads that same record before Transaction A commits. Later, Transaction A decides to rollback and now we have changes in Transaction B that are inconsistent. This is a dirty read. Transaction B was running in READ_UNCOMMITTED isolation level so it was able to read Transaction A changes before a commit occurred.
+Non-Repeatable Reads: Transaction "A" reads some record. Then Transaction "B" writes that same record and commits. Later Transaction A reads that same record again and may get different values because Transaction B made changes to that record and committed. This is a non-repeatable read.
+Phantom Reads: Transaction "A" reads a range of records. Meanwhile, Transaction "B" inserts a new record in the same range that Transaction A initially fetched and commits. Later Transaction A reads the same range again and will also get the record that Transaction B just inserted. This is a phantom read: a transaction fetched a range of records multiple times from the database and obtained different result sets (containing phantom records).
+@Transactional(timeout=60)
 
+Defaults to the default timeout of the underlying transaction system.
 
+Informs the tx manager about the time duration to wait for an idle tx before a decision is taken to rollback non-responsive transactions.
 
+@Transactional(propagation=Propagation.REQUIRED)
 
+If not specified, the default propagational behavior is REQUIRED. 
 
+Other options are  REQUIRES_NEW , MANDATORY  , SUPPORTS  , NOT_SUPPORTED  , NEVER  , and  NESTED .
 
+REQUIRED
 
+Indicates that the target method cannot run without an active tx. If atxhas already been started before the invocation of this method, then it will continue in the same tx or a newtxwould begin soon as this method is called.    
+REQUIRES_NEW
 
+Indicates that a newtxhas to start every time the target method is called. If already atxis going on, it will be suspended before starting a new one.
+MANDATORY
 
+Indicates that the target method requires an active tx to be running. If atxis not going on, it will fail by throwing an exception.
+SUPPORTS
 
+Indicates that the target method can execute irrespective of atx. If atxis running, it will participate in the same tx. If executed without a tx it will still execute if no errors.
+Methods which fetch data are the best candidates for this option.
+NOT_SUPPORTED
 
+Indicates that the target method doesn’t require the transaction context to be propagated.
+Mostly those methods which run in a transaction but perform in-memory operations are the best candidates for this option.
+NEVER
 
+Indicates that the target method will raise an exception if executed in a transactional process.
+This option is mostly not used in projects.
+@Transactional (rollbackFor=Exception.class)
 
+Default is rollbackFor=RunTimeException.class
+In Spring, all API classes throw RuntimeException, which means if any method fails, the container will always rollback the ongoing transaction.
+The problem is only with checked exceptions. So this option can be used to declaratively rollback a transaction if Checked Exception occurs.
+@Transactional (noRollbackFor=IllegalStateException.class)
 
+Indicates that a rollback should not be issued if the target method raises this exception.
 
+>>>Spring JDBC addesses the below challenges in JDbc:
+========================
+We need to write a lot of code before and after executing the query, such as creating connection, statement, closing resultset, connection etc.
+We need to perform exception handling code on the database logic.
+We need to handle transaction.
+Repetition of all these codes from one to another database logic is a time consuming task.
 
+==================
+Types of JDBC Templates:
 
+JdbcTemplate
+NamedParameterJdbcTemplate
+SimpleJdbcTemplate
+SimpleJdbcInsert and SimpleJdbcCall
+>https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/jdbc/core/JdbcTemplate.html
 
+>Validation are of 2 types.
+1)client/browser side----js,html5
+2)Server side
+db level validation,server level validation
 
+Apache POI--for creating/updating/deleting ms offcie files.
+itext/pdfbox---for pdf file creating/modify/deletion
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
----
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>1.1.0.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>5.1.0.Final</version>
+		</dependency>
+		
 
 
 
