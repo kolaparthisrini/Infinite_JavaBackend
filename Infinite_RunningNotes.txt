@@ -1588,7 +1588,183 @@ itext/pdfbox---for pdf file creating/modify/deletion
 			<artifactId>hibernate-validator</artifactId>
 			<version>5.1.0.Final</version>
 		</dependency>
-		
+==>
+Understanding Pointcut
+Pointcut is an expression language of Spring AOP.
+
+The @Pointcut annotation is used to define the pointcut. We can refer the pointcut expression by name also. Let's see the simple example of pointcut expression.
+
+@Pointcut("execution(* Operation.*(..))")  
+private void doSomething() {}  
+The name of the pointcut expression is doSomething(). It will be applied on all the methods of Operation class regardless of return type.
+
+Understanding Pointcut Expressions
+Let's try the understand the pointcut expressions by the examples given below:
+
+@Pointcut("execution(public * *(..))")  
+It will be applied on all the public methods.
+
+@Pointcut("execution(public Operation.*(..))")  
+It will be applied on all the public methods of Operation class.
+
+@Pointcut("execution(* Operation.*(..))")  
+It will be applied on all the methods of Operation class.
+
+@Pointcut("execution(public Employee.set*(..))")  
+It will be applied on all the public setter methods of Employee class.
+
+@Pointcut("execution(int Operation.*(..))")  
+It will be applied on all the methods of Operation class that returns int value.
+
+
+
+
+>>>>>https://docs.spring.io/spring-framework/reference/core/aop.html
+
+=======================================================================
+9-Oct-2023
+===========
+>ACID roperties
+Primaray key,foreign key creations
+Sequence
+Check,not null constraints
+Cascading rules
+Transaction ISolation levels and propagationslation
+Relationships,one-to-one,one-to-many,many-to-many
+
+====>
+https://hibernate.org/
+
+to fetch values from properties files,the use @Value
+@Repository,@Service,@Controller
+>>>Steps for Hibernate :
+Create the Persistent/Pojo class
+Create the mapping file for Persistent class
+Create the Configuration file
+Create the class that retrieves or stores the persistent object
+Load the jar file
+Run the first hibernate application by using command prompt
+====>
+You can access to the SessionFactory object in two ways
+
+first:
+
+StandardServiceRegistry ssr = new StandardServiceRegistryBuilder()
+.configure("hibernate.cfg.xml").build();
+Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
+SessionFactory factory = meta.getSessionFactoryBuilder().build();
+second:
+
+Configuration cfg = new Configuration().configure();
+SessionFactory factory = cfg.buildSessionFactory();
+
+both of them use StandardServiceRegistry, but second one is shorter and use StandardServiceRegistry in the configure() method and you don't see it in your code
+
+
+
+
+================>
+ELEMENT	DESCRIPTION
+SessionFactory	The SessionFactory is a factory of session and client of Connection Provider. It holds second level cache (optional) of data.
+
+Session	The session object provides an interface between the application and data stored in the database. It is a short-lived object and wraps the JDBC connection. It is a factory of Transaction, Query and Criteria and holds the first-level cache of data. The Session interface provides methods to INSERT, UPDATE, and DELETE the objects.
+
+Transaction	The transaction object specifies the atomic unit of work and is an optional parameter in the Hibernate framework.
+
+ConnectionProvider	It is a factory of JDBC connections and abstracts the application from DriverManager or DataSource. It is an optional parameter in the Hibernate framework.
+
+TransactionFactory	It is a factory of Transaction and is again an optional parameter in the Hibernate framework.
+
+
+===>
+StandardServiceRegistry
+MetadataSources
+Metadata 
+====>
+Collection type	Mapping and Description
+java.util.Set	This is mapped with a <set> element and initialized with java.util.HashSet
+java.util.SortedSet	This is mapped with a <set> element and initialized with java.util.TreeSet. The sort attribute can be set to either a comparator or natural ordering.
+java.util.List	This is mapped with a <list> element and initialized with java.util.ArrayList
+java.util.Collection	This is mapped with a <bag> or <ibag> element and initialized with java.util.ArrayList
+java.util.Map	This is mapped with a <map> element and initialized with java.util.HashMap
+java.util.SortedMap	This is mapped with a <map> element and initialized with java.util.TreeMap. The sort attribute can be set to either a comparator or natural ordering.
+
+====
+if we want to insert multiple objects into table,
+Collections--Map,list,set
+Loops
+Batch operations
+
+Hibernate Object Lifecycle?
+============================
+SpringBoot
+----------
+dependencies version issues---Can be handled using Uber jar architectures
+Tomcat not working or throwing errors most frequently---can be fixed if framework is giveing
+embedded server.So ,no need to download tomcat and configure in Eclipse.
+
+
+Spring boot supports Uber jar architecture.
+Uber jar means jar with jar.
+In main jar all child jars will be appended and downloaded into ur m2 repository.This will avoid 90% of the maven dependency issues.g 
+
+Springboot is mainly used for Designing Cloud based applications and Microservice app development.
+
+Spring boot+Spring Cloud
+
+>>You shld be able to deploy springboot application to AWS cloud/Dockers.
+
+
+TO deisgn a webservice,we need to write atleast 50 lines.\
+But if u use Springboot,within 5 line we can complete.
+
+>>>>To design a Springboot app,below are the ways.
+1)USing Eclipse---Gradle/Maven----recommended approach
+2)Using Spring Initiliazer --https://start.spring.io/
+3)Using SpringBoot Cli
+4)Manual approach
+
+https://spring.io/tools--Spring Tool suite version4
+
+>Use static folder for placing static assets like images,fonts...etc
+
+Freemarker
+
+@Repository,@Service,@RestController,@ComponentScanning,@Controller
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
