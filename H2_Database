@@ -1,0 +1,17 @@
+>http://localhost:8080/h2-console
+>H2 is a relational database management system written in Java. It can be embedded in Java applications or run in client-server mode. It's an in-memory database, meaning 
+information stored in DB is transient and cleared with the application.
+>H2 database is lightweight and excellent for POC and Test cases. The application can use any enterprise-grade database; however, a unit test for the data layer can use the H2 database.
+>Spring boot has strong integration with the H2 database, and most of the configurations are provided by default using auto-configurations. Spring boot uses the H2 database in embedded mode.
+As a result, database and application are part of the same process.
+><dependency>
+    <groupId>com.h2database</groupId>
+    <artifactId>h2</artifactId>
+    <scope>runtime</scope>
+</dependency>
+>spring.datasource.url=jdbc:h2:mem:testdb
+spring.datasource.driverClassName=org.h2.Driver
+spring.datasource.username=sa
+spring.datasource.password=password
+spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+>To enable h2,spring.h2.console.enabled=true
