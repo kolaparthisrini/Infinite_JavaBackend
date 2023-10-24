@@ -4,4 +4,8 @@
 You might think that if we can generate code automatically with the help of an IDE (like Eclipse/STS etc.), then what will be the benefit of using Lombok? For example, suppose you have a POJO class containing 10 fields/properties. In the middle of development if you want to change number of fields, or name of field or datatype of field. Then you must either update the  implementation of getterXXX(), setterXXX(), toString(), equals(), hashCode(), parameterized constructors etc. or remove them & regenerate once again. But if you use
 Lombok library, you don’t need to make any changes in mentioned methods or parameterized constructors. Lombok will take care of it and automatically update the changes in .class file.
 
->
+>Ways to run Spring boot from CMD:
+1)java -jar my-application.jar --spring.profiles.active=production
+2)java -Dspring.profiles.active=production -jar my-application.jar
+
+>>
