@@ -1616,7 +1616,7 @@ It will be applied on all the public setter methods of Employee class.
 @Pointcut("execution(int Operation.*(..))")  
 It will be applied on all the methods of Operation class that returns int value.
 
-
+>>@ComponentScan annotation enables component scanning in Spring. Java classes that are decorated with stereotypes such as @Component, @Configuration, @Service are auto-detected by Spring. The @ComponentScan's basePackages attribute specifies which packages should be scanned for decorated beans.
 
 
 >>>>>https://docs.spring.io/spring-framework/reference/core/aop.html
@@ -1659,10 +1659,6 @@ Configuration cfg = new Configuration().configure();
 SessionFactory factory = cfg.buildSessionFactory();
 
 both of them use StandardServiceRegistry, but second one is shorter and use StandardServiceRegistry in the configure() method and you don't see it in your code
-
-
-
-
 ================>
 ELEMENT	DESCRIPTION
 SessionFactory	The SessionFactory is a factory of session and client of Connection Provider. It holds second level cache (optional) of data.
@@ -1731,29 +1727,133 @@ https://spring.io/tools--Spring Tool suite version4
 Freemarker
 
 @Repository,@Service,@RestController,@ComponentScanning,@Controller
+>>
+It is very easy to develop Spring Based applications with Java or Groovy.
+It reduces lots of development time and increases productivity.
+It avoids writing lots of boilerplate Code, Annotations and XML Configuration.
+It is very easy to integrate Spring Boot Application with its Spring Ecosystem like Spring JDBC, Spring ORM, Spring Data, Spring Security etc.
+It follows “Opinionated Defaults Configuration” Approach to reduce Developer effort
+It provides Embedded HTTP servers like Tomcat, Jetty etc. to develop and test our web applications very easily.
+It provides CLI (Command Line Interface) tool to develop and test Spring Boot(Java or Groovy) Applications from command prompt very easily and quickly.
+It provides lots of plugins to develop and test Spring Boot Applications very easily using Build Tools like Maven and Gradle
+It provides lots of plugins to work with embedded and in-memory Databases very easily.
+
+>>
+@Controller -> Classes annotated with this, are intended to receive a request from the client side. The first request comes to the Dispatcher Servlet, from where it passes the request to the particular controller using the value of @RequestMapping annotation.
+
+@Service -> Classes annotated with this, are intended to manipulate data, that we receive from the client or fetch from the database. All the manipulation with data should be done in this layer.
+
+@Repository -> Classes annotated with this, are intended to connect with database. It can also be considered as DAO(Data Access Object) layer. This layer should be restricted to CRUD (create, retrieve, update, delete) operations only. If any manipulation is required, data should be sent be send back to @Service layer.
+
+>>In springboot ,Spring application class will boostrap(loader) the current class as per the loading strategy(lazy,early).
+
+>>>Springboot Devtools
+================================
+
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-devtools</artifactId>
+        <optional>true</optional>
+    </dependency>
+</dependencies>
+
+1)Autorestart
+2)Live reload---we need to enable live reload plugin for chrome.
+Drawback: As live reload is a heavy weight component,some times browser might crash or ur system might hang.Pls be careful while using this feature.
+3)Global configurations
+4)Remote app
 
 
+>>While we are working on docker with springboot,we need to configure several docker parameters in springboot.Otherwise we cannot integrate docker with Springboot.So spring boot is giving Docker properties.
+====================
+Scheduling in SpringBoot
+-------------------------
+>We will use schedulers.This is used mainly to perform as task based on event.
+>Wen ever an event is fired,some action shld be perfomed.
+on the last working day of month arises,then salary shld be credited.
+>Springboot schedulers
+>All banks used "Quartz" scheduler.this is market leader.
+Even though springboot provides Scheduling capabilities,we will use Quartz for better output.
 
+>>We need to ass Quartz libraries into Springboot app.
+@Scheduler in springboot
 
+>>I want to send an SMS for evry 5 minutes to Indu.
 
+Indu is receipient.
 
+Sender is srini.
 
+Condition is every 5minutes
 
+Action is sending SMS
 
+https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/scheduling/support/CronExpression.html
+=============================================
+API Definition File
 
+API Definition File is a file that contains all the things that you can do with a file. This file contains the following things:
 
+Server location
+How security is handled, i.e., authorization.
+All the available resources in that API.
+All the different data that you can send in a request.
+What data is returned
+What HTTP status codes can be returned
 
+>>>>springfox-boot-starter---Swagger
 
+or 
 
+<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.4.0</version>
+		</dependency>
 
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.4.0</version>
+		</dependency>
+		
+		>> http://localhost:8080/swagger-ui.html
+		http://localhost:8080/v2/api-docs
 
+==========================
+<link rel="stylesheet" type="text/css" href="mystyle.css">  
 
+Inline CSS:
+<!DOCTYPE html>  
+<html>  
+<head>  
+<style>  
+body {  
+    background-color: linen;  
+}  
+h1 {  
+    color: red;  
+    margin-left: 80px;  
+}   
+</style>  
+</head>  
+</head>  
+<body>  
+<h1>The internal style sheet is applied on this heading.</h1>  
+<p>This paragraph will not be affected.</p>  
+</body>  
+</html>  
+===============================================================
+The key steps behind enabling Async methods in Spring are here:
 
+1) Enable async processing in Spring Boot by annotation Spring Boot Application class with @EnableAsync
 
+2) Create a ThreadPoolExecutor to run async methods in separate threads
 
-
-
-
+3) Annotate the methods that need to be run in separate threads with @Async annotation
+-
+SimpleAsyncTaskExector is used by Spring Boot to execute an async method. By adding the @Async annotation to a bean method allows it to run in a different thread. In other terms, the caller won't wait for the called method to finish.
 
 
 
