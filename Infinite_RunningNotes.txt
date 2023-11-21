@@ -1845,6 +1845,15 @@ h1 {
 </body>  
 </html>  
 ===============================================================
+
+===>When you call session.flush(), the statements are executed in database but it will not committed.
+If you don’t call session.flush() and if you call session.commit() , internally commit() method executes the statement and commits.
+
+So commit()= flush+commit.
+So seesion.flush() just executes the statements in database (but not commits) and statements are NOT IN MEMORY anymore. It just forces the session to flush.
+
+=>ExecutorService helps in maintaining a pool of threads and assigns them tasks. It also provides the facility to queue up tasks until there is a free thread available if the number of tasks is more than the threads available.
+
 The key steps behind enabling Async methods in Spring are here:
 
 1) Enable async processing in Spring Boot by annotation Spring Boot Application class with @EnableAsync
@@ -1854,6 +1863,201 @@ The key steps behind enabling Async methods in Spring are here:
 3) Annotate the methods that need to be run in separate threads with @Async annotation
 -
 SimpleAsyncTaskExector is used by Spring Boot to execute an async method. By adding the @Async annotation to a bean method allows it to run in a different thread. In other terms, the caller won't wait for the called method to finish.
+
+===>
+If you change two fields at the same time, then It will throw an ObjectOptimisticLockingFailureException.
+To handle this we can use simply version-less optimistic locking.
+This can be achieved by using @OptimisticzLocking and @DynamicUpdate annotations.
+====>
+JPA specification defines three pessimistic lock modes that we’re going to discuss:
+
+PESSIMISTIC_READ allows us to obtain a shared lock and prevent the data from being updated or deleted.
+PESSIMISTIC_WRITE allows us to obtain an exclusive lock and prevent the data from being read, updated or deleted.
+PESSIMISTIC_FORCE_INCREMENT works like PESSIMISTIC_WRITE, and it additionally increments a version attribute of a versioned entity.
+
+==>PA specification provides different types of exceptions:
+
+PessimisticLockException indicates that obtaining a lock or converting a shared to exclusive lock fails and results in a transaction-level rollback.
+LockTimeoutException indicates that obtaining a lock or converting a shared lock to exclusive times out and results in a statement-level rollback.
+PersistenceException indicates that a persistence problem occurred. PersistenceException and its subtypes, except NoResultException, NonUniqueResultException, LockTimeoutException and QueryTimeoutException, mark the active transaction to be rolled back.
+
+===================
+a) When sleep() method is invoked on a thread to sleep for specified time period, the thread is out of queue during this time period. The thread again reenters into the runnable state as soon as this time period is elapsed.
+
+b) When a thread is suspended using suspend() method for some time in order to satisfy some conditions. A suspended thread can be revived by using resume() method.
+
+c) When wait() method is called on a thread to wait for some time. The thread in wait state can be run again using notify() or notifyAll() method.
+
+Blocked state: A thread is considered to be in the blocked state when it is suspended, sleeping, or waiting for some time in order to satisfy some condition.
+
+==========================
+lua---but it wont work for all types of platforms.
+||
+JavaScript----independent
+========
+>>javascript and java both are different.
+>>is a Object based scripting language used for designing dynamic web pages.
+>>We can design even mobile apps using javascript language.
+Example: Kony Mobile framework ,Phonegap...etc
+>>Webservice can also be created.
+
+>>.js
+>>java ----JVM
+  javascript---VM---browser
+
+Evry browser will have inbuilt javascript Engine which takes the responsibility of running ur script code.
+
+Chrome-----V8
+IE/Edge--------Chakra
+Rhino--Safari
+
+Disadvantages:
+============
+js is not secure
+doent support all OOPS features
+js doent support desktop app development
+Multithreading is not supported
+doent support NIO operations
+cannot create network based apps
+javascript doent support db operations like create,delete,drop and update directly.
+
+FrontEnd: ReactJS,reactnative,Angular,Backbone,vuejs....etc
+above frameworks will use nodejs capabilities to perform Scaffolding and for writing/running the code.
+>>java.....maven---javascript----NPM(part of nodejs)--node package manager
+>>To create a corporate repo,we can use Nexus Sonatype or Jfrog.
+>>Code quality testing for Javascript----Sonarqube
+IDE----->VS code
+Unit testing---->protractor
+CI/CD Server-----jenkins/team city
+
+Ways to run javascript code:
+-------------------------------
+1)Using browser console
+2)Thru IDE like VS code or Eclipse or sublime
+3)Create a Html file with JS code as inline.
+4)Using javascript playground
+5)Using Nodejs
+
+---------->Java to Javascript communication
+
+java had a javascript package----Rhino as a Javascript engine
+>>>DWR framework for java to javascript and vice versa
+
+=========>No datatypes in javascript.
+>>js supports few collections like array,list.
+
+Syntax: var <variablename>; 
+
+There are 8 ways to create Js function:
+1)Syntax for Function:
+
+function <functionname>()
+{
+
+}
+
+<!DOCTYPE html>  
+<html>  
+<body>  
+<script>  
+var a=10;  
+var b=20;  
+var c=a+b; //It add values of a and b variable  
+document.write(c); // print sum of 10 and 20  
+</script>  
+</body>  
+</html>
+
+>>
+<!DOCTYPE html>  
+<html>  
+<body>  
+<h2>Use JavaScript to Change Text</h2>  
+<p id="demo"></p>  
+<script>  
+document.getElementById("demo").innerHTML = "Hello Srinivas";  
+</script>  
+</body>  
+</html>
+==============
+Html------not working on IE7
+
+
+html5 abcd---google chrome
+
+>>>IF any browser is not asupporting html5 features on specific versions or browser,then we need to use "POLYFILLS".
+
+A polyfill is set of javascript instructions or a js program provided by the 3rd party 
+vendors to achive a specific requirement on specified browser version.
+
+>>SPA--Single page Application
+>>>>>https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
+
+>>>>>>>>>>>>>>>>>>>>>https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String
+============================
+The @EnableAsync annotation switches on Spring’s ability to run @Async methods in a background thread pool.
+
+In java to create a Threadpool,we need to use ThreadPoolExecutor class.
+
+Spring tries to find thread pool associated with the context. It uses this thread pool to submit the request in a separate thread and release the main thread.
+Spring will search for TaskExecutor bean or a bean named as taskExecutor else it will fall back to the SimpleAsyncTaskExecutor.
+
+>>java meloddy is a Opensource APM tool.APM stands for application performance management/monitoring tool.
+
+>>Synchronized blocks
+
+==========
+open(method, url, async)	Specifies the type of request
+
+method: the type of request: GET or POST
+url: the server (file) location
+async: true (asynchronous) or false (synchronous)
+send()	Sends the request to the server (used for GET)
+send(string)	Sends the request to the server (used for POST)
+
+>>let x = function(x, y) {
+   return x * y;
+}
+================
+class Calculator
+{
+
+constructor(a)
+{
+console.log("Empty Constructor invoked"+a);
+}
+
+static abcd()
+{
+console.log('abcd invoked');
+}
+}
+
+var obj = new Calculator(45);
+Calculator.abcd();
+-------------
+Functional JS
+Object oriented JS
+Prototyping JS
+>>
+EvalError: It creates an instance for the error that occurred in the eval(), which is a global function used for evaluating the js string code.
+InternalError: It creates an instance when the js engine throws an internal error.
+RangeError: It creates an instance for the error that occurs when a numeric variable or parameter is out of its valid range.
+ReferenceError: It creates an instance for the error that occurs when an invalid reference is de-referenced.
+SyntaxError: An instance is created for the syntax error that may occur while parsing the eval().
+TypeError: When a variable is not a valid type, an instance is created for such an error.
+URIError: An instance is created for the error that occurs when invalid parameters are passed in encodeURI() or decodeURI().
+
+>>In Javascript,we we want to combine multiple array objects/collection,we can use 
+"SPREAD OPERATOR".
+Syntax: ...<array/Variable name>
+
+>>Rest Operator
+
+
+
+
+
 
 
 
